@@ -7,6 +7,7 @@ import Pizza from './Pizza'
 
 import schema from './Schema'
 import * as yup from 'yup'
+import axios from "axios";
 
 // INITIAL STATES
 const initialFormValues = {
@@ -25,13 +26,25 @@ const initialFormErrors = {
     special: '',
 }
 
+const initialPizzas = []
+
 const App = () => {
 
   // STATES
+  const [pizzas, setPizzas] = useState(initialPizzas)
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
 
   
+  // HELPERS
+  const postNewPizza = newPizza => {
+    axios.post('https://reqres.in/api/orders', newPizza)
+    .then(res => {
+      setPizzas([res.data, ...pizzas])
+    }).catch(err => console.err(err))
+  }
+
+
   // EVENT HANDLERS
   const validate = (name, value) => {
     yup.reach(schema, name)
@@ -54,6 +67,7 @@ const App = () => {
       size: formValues.size,
       toppings: ['pepperoni', 'sausage', 'tomatoes', 'peppers'].filter(topping => !!formValues[topping])
     }
+    postNewPizza(newPizza)
   }
 
   return (

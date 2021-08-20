@@ -51,6 +51,7 @@ export default function Form(props){
                 {/* DROPDOWN */}
                 <label>Size:
                     <select
+                        id="size-dropdown"
                         value={values.size}
                         onChange={onChange}
                         name='size'
@@ -102,6 +103,7 @@ export default function Form(props){
                 <h4>Special Instructions:</h4>
                 <label>
                     <input
+                        id="special-text"
                         value={values.special}
                         onChange={onChange}
                         name='special'
