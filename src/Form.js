@@ -24,8 +24,6 @@ export default function Form(props){
             <div className='form-group submit'>
                 <h2>Add a Pizza</h2>
 
-                <button id='order-button'>Add to Order</button>
-
                 <div className='errors'>
                     <div>{errors.name}</div>
                     <div>{errors.size}</div>
@@ -35,13 +33,13 @@ export default function Form(props){
             </div>
 
             <div className='form-group inputs'>
-                <h4>General Information</h4>
+                <h4>Order Information</h4>
 
 
                 {/* TEXT INPUT */}
-                <h4>Header Name:</h4>
-                <label>Label Name:
+                <label>Name:
                     <input
+                        id="name-input"
                         value={values.name}
                         onChange={onChange}
                         name='name'
@@ -51,8 +49,7 @@ export default function Form(props){
 
 
                 {/* DROPDOWN */}
-                <h4>Header Size:</h4>
-                <label>Label Size:
+                <label>Size:
                     <select
                         value={values.size}
                         onChange={onChange}
@@ -70,13 +67,50 @@ export default function Form(props){
                 <h4>Toppings:</h4>
                 <label>Pepperoni
                     <input
-                        value='small'
                         onChange={onChange}
-                        name='size'
-                        type='radio'
-                        checked={values.size === 'small'}
+                        name='pepperoni'
+                        type='checkbox'
+                        checked={values.pepperoni}
                     />
                 </label>
+                <label>Sausage
+                    <input
+                        onChange={onChange}
+                        name='sausage'
+                        type='checkbox'
+                        checked={values.sausage}
+                    />
+                </label>
+                <label>Tomatoes
+                    <input
+                        onChange={onChange}
+                        name='tomatoes'
+                        type='checkbox'
+                        checked={values.tomatoes}
+                    />
+                </label>
+                <label>Peppers
+                    <input
+                        onChange={onChange}
+                        name='peppers'
+                        type='checkbox'
+                        checked={values.peppers}
+                    />
+                </label>
+
+                {/* TEXT INPUT */}
+                <h4>Special Instructions:</h4>
+                <label>
+                    <input
+                        value={values.special}
+                        onChange={onChange}
+                        name='special'
+                        type='text'
+                    />
+                </label>
+
+                <button id='order-button'>Add to Order</button>
+
             </div>
         </form>
     )

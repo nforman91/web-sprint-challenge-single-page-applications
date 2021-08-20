@@ -16,11 +16,13 @@ const initialFormValues = {
     sausage: false,
     tomatoes: false,
     peppers: false,
+    special: '',
   }
 
 const initialFormErrors = {
     name: '',
     size: '',
+    special: '',
 }
 
 const App = () => {
