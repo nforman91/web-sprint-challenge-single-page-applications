@@ -24,7 +24,7 @@ describe('Pizza App', () => {
 
     it('Submit form', () => {
         nameInput().type('Name')
-        cy.get('select').select('small')
+        cy.get('select').select('small').should('have.value', 'small')
         cy.get('[type="checkbox"]').check()
         specialInput().type('No mushrooms')
         submitBtn().click()

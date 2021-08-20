@@ -50,9 +50,11 @@ const App = () => {
 
   const postNewPizza = newPizza => {
     axios.post('https://reqres.in/api/orders', newPizza)
-    .then(res => {
-      setPizzas([res.data, ...pizzas])
-    }).catch(err => console.err(err))
+      .then(res => {
+        setPizzas([res.data, ...pizzas]);
+      }).catch(err => console.err(err));
+      
+    setFormValues(initialFormValues);
   }
 
 
@@ -76,7 +78,8 @@ const App = () => {
     const newPizza = {
       name: formValues.name.trim(),
       size: formValues.size,
-      toppings: ['pepperoni', 'sausage', 'tomatoes', 'peppers'].filter(topping => !!formValues[topping])
+      toppings: ['pepperoni', 'sausage', 'tomatoes', 'peppers'].filter(topping => !!formValues[topping]),
+      special: formValues.special.trim(),
     }
     postNewPizza(newPizza)
   } 
@@ -95,7 +98,7 @@ const App = () => {
   return (
     <>
       <header>
-        <h1>Lambda Eats</h1>
+        <h1 className="pagetitle">Lambda Eats</h1>
 
         <nav className="navbar">
           <li>
@@ -106,7 +109,6 @@ const App = () => {
           </li>
         </nav>
       </header>
-
 
       <Switch>
           <Route path="/pizza/order">

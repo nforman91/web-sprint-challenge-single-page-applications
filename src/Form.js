@@ -1,4 +1,5 @@
 import React from 'react'
+import pizzaImg from './Assets/Pizza.jpg'
 
 export default function Form(props){
     const{
@@ -21,20 +22,12 @@ export default function Form(props){
     }
 
     return(
+        <>
+        <img src={pizzaImg} alt="Picture of a pizza" />
         <form id="pizza-form" className='form-container' onSubmit={onSubmit}>
-            <div className='form-group submit'>
                 <h2>Add a Pizza</h2>
-
-                <div className='errors'>
-                    <div>{errors.name}</div>
-                    <div>{errors.size}</div>
-                    <div>{errors.toppings}</div>
-                    <div>{errors.special}</div>
-                </div>
-            </div>
-
-            <div className='form-group inputs'>
                 <h4>Order Information</h4>
+            <div className='forminputs'>
 
 
                 {/* TEXT INPUT */}
@@ -48,7 +41,7 @@ export default function Form(props){
                         type='text'
                     />
                 </label>
-
+                    <div className='errors'>{errors.name}</div>
 
                 {/* DROPDOWN */}
                 <h4>Size:</h4>
@@ -65,7 +58,7 @@ export default function Form(props){
                         <option value='large'>Large</option>
                     </select>
                 </label>
-
+                    <div className='errors'>{errors.size}</div>
 
                 {/* CHECKBOXES */}
                 <h4>Toppings:</h4>
@@ -101,6 +94,7 @@ export default function Form(props){
                         checked={values.peppers}
                     />
                 </label>
+                    <div className='errors'>{errors.toppings}</div>
 
                 {/* TEXT INPUT */}
                 <h4>Special Instructions:</h4>
@@ -113,11 +107,12 @@ export default function Form(props){
                         type='text'
                     />
                 </label>
-
-                <h4>Click to Order</h4>
-                <button id='order-button' disabled={disabled}>Add to Order</button>
-
+                    <div className='errors'>{errors.special}</div>
             </div>
+
+            <h4>Click to Order</h4>
+            <button id='order-button' disabled={disabled}>Add to Order</button>
         </form>
+        </>
     )
 }
