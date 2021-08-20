@@ -113,9 +113,9 @@ const App = () => {
       <Switch>
           <Route path="/pizza/order">
             {
-              pizzas.map(pizza => {
+              pizzas.map((pizza, idx) => {
                 return(
-                  <Pizza id="pizza-order" key={pizza.id} details={pizza} />
+                  <Pizza id="pizza-order" key={idx} details={pizza} />
                 )
               })
               

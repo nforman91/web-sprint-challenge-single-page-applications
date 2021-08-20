@@ -39,6 +39,8 @@ export default function Form(props){
                         onChange={onChange}
                         name='name'
                         type='text'
+                        placeholder='Type in a name'
+                        maxLength='30'
                     />
                 </label>
                     <div className='errors'>{errors.name}</div>
@@ -105,6 +107,8 @@ export default function Form(props){
                         onChange={onChange}
                         name='special'
                         type='text'
+                        placeholder='Special instructions?'
+                        maxLength='100'
                     />
                 </label>
                     <div className='errors'>{errors.special}</div>

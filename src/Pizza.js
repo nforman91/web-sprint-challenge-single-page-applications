@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Pizza ({details}) {
     // const { pizzaId } = useParams();
-
+    
     if(!details){
         return <h3>Working on fetching your pizza order...</h3>
     }
@@ -22,6 +22,7 @@ export default function Pizza ({details}) {
                     </ul>
                 </div>
             }
+            
 
             <p>Special Instructions: {details.special}</p>
         </div>

@@ -12,10 +12,15 @@ code {
     monospace;
 }
 
-nav{
+header h1{
+  display:flex;
+  justify-content:flex-start;
+}
+
+header nav{
   display:flex;
   justify-content:flex-end;
-  margin-right:20px;
+  margin-right: 20px;
 }
 
 nav li{
