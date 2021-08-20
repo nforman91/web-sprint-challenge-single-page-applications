@@ -53,7 +53,7 @@ const App = () => {
       .then(res => {
         setPizzas([res.data, ...pizzas]);
       }).catch(err => console.err(err));
-      
+
     setFormValues(initialFormValues);
   }
 
@@ -81,7 +81,7 @@ const App = () => {
       toppings: ['pepperoni', 'sausage', 'tomatoes', 'peppers'].filter(topping => !!formValues[topping]),
       special: formValues.special.trim(),
     }
-    postNewPizza(newPizza)
+    postNewPizza(newPizza);
   } 
 
 
