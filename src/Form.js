@@ -5,7 +5,8 @@ export default function Form(props){
         values, 
         submit, 
         change, 
-        errors
+        errors,
+        disabled,
     } = props
 
     const onSubmit = evt => {
@@ -20,7 +21,7 @@ export default function Form(props){
     }
 
     return(
-        <form className='form-container' onSubmit={onSubmit}>
+        <form id="pizza-form" className='form-container' onSubmit={onSubmit}>
             <div className='form-group submit'>
                 <h2>Add a Pizza</h2>
 
@@ -37,7 +38,8 @@ export default function Form(props){
 
 
                 {/* TEXT INPUT */}
-                <label>Name:
+                <h4>Name:</h4>
+                <label>
                     <input
                         id="name-input"
                         value={values.name}
@@ -49,7 +51,8 @@ export default function Form(props){
 
 
                 {/* DROPDOWN */}
-                <label>Size:
+                <h4>Size:</h4>
+                <label>
                     <select
                         id="size-dropdown"
                         value={values.size}
@@ -111,7 +114,8 @@ export default function Form(props){
                     />
                 </label>
 
-                <button id='order-button'>Add to Order</button>
+                <h4>Click to Order</h4>
+                <button id='order-button' disabled={disabled}>Add to Order</button>
 
             </div>
         </form>

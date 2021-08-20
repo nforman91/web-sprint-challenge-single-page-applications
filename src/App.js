@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { useRouteMatch } from 'react-router';
 import { Route, Link, Switch } from "react-router-dom";
 
-import Home from './Home'
-import Form from './Form'
-import Pizza from './Pizza'
+import Home from './Home';
+import Form from './Form';
+import Pizza from './Pizza';
 
-import schema from './Schema'
-import * as yup from 'yup'
-import axios from "axios";
+import schema from './Schema';
+import * as yup from 'yup';
+import axios from 'axios';
 
 // INITIAL STATES
 const initialFormValues = {
@@ -27,16 +28,26 @@ const initialFormErrors = {
 }
 
 const initialPizzas = []
+const initialDisabled = true
 
 const App = () => {
+  // const { path, url } = useRouteMatch();
 
   // STATES
   const [pizzas, setPizzas] = useState(initialPizzas)
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   
   // HELPERS
+  // const getPizzas = () => {
+  //   axios.get('https://reqres.in/api/orders')
+  //     .then(res => {
+  //       setPizzas(res.data.data)
+  //     }).catch(err => console.error(err))
+  // }
+
   const postNewPizza = newPizza => {
     axios.post('https://reqres.in/api/orders', newPizza)
     .then(res => {
@@ -68,32 +79,54 @@ const App = () => {
       toppings: ['pepperoni', 'sausage', 'tomatoes', 'peppers'].filter(topping => !!formValues[topping])
     }
     postNewPizza(newPizza)
-  }
+  } 
+
+
+  // SIDE EFFECTS
+  // useEffect(() => {
+  //   getPizzas()
+  // }, [])
+
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
+
 
   return (
     <>
-      <nav className="navbar">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/pizza" id="order-pizza">Form</Link>
-        </li>
-      </nav>
+      <header>
+        <h1>Lambda Eats</h1>
 
-      <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
+        <nav className="navbar">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/pizza" id="order-pizza">Order</Link>
+          </li>
+        </nav>
+      </header>
+
+
       <Switch>
           <Route path="/pizza/order">
-            <Pizza id="pizza-order" />
+            {
+              pizzas.map(pizza => {
+                return(
+                  <Pizza id="pizza-order" key={pizza.id} details={pizza} />
+                )
+              })
+              
+            }
+            
           </Route>
           <Route path="/pizza">
-            <Form 
-              id="pizza-form"
+            <Form
               values={formValues}
               change={inputChange}
               submit={formSubmit}
               errors={formErrors}
+              disabled={disabled}
             />
           </Route>
           <Route exact path="/">
